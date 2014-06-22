@@ -8,9 +8,11 @@ NEI <- readRDS("./Data/summarySCC_PM25.rds")
 head(NEI)
 str(NEI)
 
-totalByYear <- aggregate(Emissions ~ year, data=NEI, sum)
+baltimoreCity <- NEI[NEI$fips == "24510", ]
 
-png(filename="./plot1.png", width=480, height=480)
+totalByYear <- aggregate(Emissions ~ year, data=baltimoreCity, sum)
+
+png(filename="./plot2.png", width=480, height=480)
 
 par(mar = c(4,4,2,2))
 plot(
@@ -19,15 +21,12 @@ plot(
   type="l", 
   ylab="PM2.5 emitted (total)", 
   xlab="Year",
-  main="Total PM2.5 emitted by year for all sources")
+  main="Total PM2.5 emitted by year for Baltimore City")
 
 model <- lm(totalByYear$Emissions ~ totalByYear$year)
+
 abline(model, col="red", lwd=3)
 
 dev.off()
 
 summary(model)
-
-
-
-
