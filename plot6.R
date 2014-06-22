@@ -36,3 +36,5 @@ plot(
   main="Total PM2.5 emitted by year for all LA County mobile sources")
 
 dev.off()
+
+cor(x=totalByYearBaltimore$Emissions, y=totalByYearLACounty$Emissions)
